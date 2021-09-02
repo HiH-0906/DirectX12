@@ -1,6 +1,12 @@
 #pragma once
 #include <windows.h>
+#include <memory>
 
+class Dx12Wrapper;
+/// <summary>
+/// アプリケーションを管理する
+/// シングルトンクラス
+/// </summary>
 class Application
 {
 public:
@@ -12,15 +18,13 @@ public:
 	void Initialize(void);
 	void Run(void);
 	void Terminate(void);
-
+	~Application();
 private:
 	void InitWindow(void);
 
 	WNDCLASSEX w_;
-	RECT wrc_;
-	HWND hwnd_;
-
-	Application() = default;
-	~Application() = default;
+	HWND windowHandle_;
+	std::unique_ptr<Dx12Wrapper> dx_;
+	Application();
 };
 
